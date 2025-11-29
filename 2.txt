@@ -1,0 +1,43 @@
+package com.example.quiz;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+
+        RadioGroup radioGroup = findViewById(R.id.radioGroup);
+        Button submit = findViewById(R.id.submit);
+
+        submit.setOnClickListener(v -> {
+            int selectedId = radioGroup.getCheckedRadioButtonId();
+            String selectedAns = "no Selection";
+
+            if (selectedId != -1) {
+                RadioButton selected = findViewById(selectedId);
+                selectedAns = selected.getText().toString();
+            }
+
+            if (selectedAns.equals("Data Structure and Algorithm")) {
+                Toast.makeText(this, "Correct Answer", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Wrong Answer", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
