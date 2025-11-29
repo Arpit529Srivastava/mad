@@ -1,0 +1,55 @@
+package com.example.myapplication;
+
+import android.os.Bundle;
+import android.widget.EditText;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+
+        EditText n1 = findViewById(R.id.num1);
+        EditText n2 = findViewById(R.id.num2);
+        EditText r = findViewById(R.id.res);
+
+        int[] buttons = {R.id.but1, R.id.but2, R.id.but3, R.id.but4, R.id.but5};
+        char[] ops = {'+', '-', '*', '/', '%'};
+
+        for (int i = 0; i < buttons.length; i++) {
+            int index = i;
+            findViewById(buttons[i]).setOnClickListener(v -> {
+                double a = Double.parseDouble(n1.getText().toString());
+                double b = Double.parseDouble(n2.getText().toString());
+                double res;
+
+                switch (ops[index]) {
+                    case '+':
+                        res = a + b;
+                        break;
+                    case '-':
+                        res = a - b;
+                        break;
+                    case '*':
+                        res = a * b;
+                        break;
+                    case '/':
+                        res = a / b;
+                        break;
+                    default:
+                        res = a % b;
+                }
+
+                r.setText(String.valueOf(res));
+            });
+        }
+    }
+}
