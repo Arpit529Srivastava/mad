@@ -1,0 +1,36 @@
+package com.example.curconv;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+
+        EditText inr = findViewById(R.id.inr);
+        EditText res = findViewById(R.id.res);
+
+        int[] buttons = { R.id.but1, R.id.but2, R.id.but3, R.id.but4 };
+        double[] rates = { 0.012, 1.73, 0.009, 0.011 };
+
+        for (int i = 0; i < buttons.length; i++) {
+            int index = i;
+            findViewById(buttons[i]).setOnClickListener(v -> {
+                double value = Double.parseDouble(inr.getText().toString());
+                res.setText(String.valueOf(value * rates[index]));
+            });
+        }
+    }
+}
